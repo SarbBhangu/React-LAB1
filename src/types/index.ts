@@ -1,3 +1,4 @@
+import React from "react";
 // types/index.ts
 export type AlertType = 'success' | 'error' | 'warning' | 'info';
  
@@ -22,5 +23,23 @@ export interface UserProfileCardProps {
   showEmail?: boolean;
   showRole?: boolean;
   onEdit?: (userId: string) => void;
+  children?: React.ReactNode;
+}
+
+// types/index.ts
+export interface Product {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  imageUrl?: string;
+  inStock: boolean;
+}
+ 
+export interface ProductDisplayProps {
+  product: Product;
+  showDescription?: boolean;
+  showStockStatus?: boolean;
+  onAddToCart?: (productId: string) => void;
   children?: React.ReactNode;
 }
