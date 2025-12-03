@@ -1,15 +1,21 @@
-import React from "react";
 import type { ProductDisplayProps } from "../../types";
 
-export const ProductDisplay: React.FC<ProductDisplayProps> = ({
+export function ProductDisplay({
   product,
   showDescription = true,
   showStockStatus = true,
   onAddToCart,
   children,
-}) => {
+}: ProductDisplayProps) {
+  const handleAddClick = () => {
+    if (onAddToCart) {
+      onAddToCart(product.id);
+    }
+  };
+
   return (
     <div>
+      
       {product.imageUrl && (
         <img
           src={product.imageUrl}
@@ -19,23 +25,25 @@ export const ProductDisplay: React.FC<ProductDisplayProps> = ({
         />
       )}
 
+      
       <h2>{product.name}</h2>
 
+      
       <p>${product.price.toFixed(2)}</p>
 
+      
       {showDescription && <p>{product.description}</p>}
 
+      
       {showStockStatus && (
         <p>{product.inStock ? "In stock" : "Out of stock"}</p>
       )}
 
+      
       {children}
 
-      {onAddToCart && (
-        <button onClick={() => onAddToCart(product.id)}>
-          Add to cart
-        </button>
-      )}
+      
+      {onAddToCart && <button onClick={handleAddClick}>Add to cart</button>}
     </div>
   );
-};
+}
